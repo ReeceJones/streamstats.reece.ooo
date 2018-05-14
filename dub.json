@@ -5,7 +5,7 @@
 	],
 	"dependencies": {
 		"vibe-d": "~>0.8.3",
-		"pubg-d": "~>0.8.1"
+		"pubg-d": "~>0.8.3"
 	},
 	"description": "Application for tracking statistics of streamers, and allowing the statistic to be displayed on the stream.",
 	"copyright": "Copyright © 2018, Reece Jones",

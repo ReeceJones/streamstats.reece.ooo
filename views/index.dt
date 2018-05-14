@@ -1,0 +1,13 @@
+doctype html
+html
+    head
+        title Stats
+    body
+        - if (requestedStat == "kills" || requestedStat == "all")
+            b Kills: #{ stats.kills }
+            br
+        - if (requestedStat == "wins" || requestedStat == "all")
+            b Wins: #{ stats.wins }
+            br
+        - if (requestedStat == "losses" || requestedStat == "all")
+            b Losses: #{ stats.losses }
