@@ -8,6 +8,9 @@ import service.query;
 
 void startQueueThread()
 {
+    auto thread = new Thread(&runFn);
+    thread.name = "DB Update";
+    thread.start();
     // auto playerRequest = new PlayerRequest("pc-na");
     // new Thread({
     //     int counter = 0;
@@ -70,6 +73,16 @@ void startQueueThread()
     //         //Thread.sleep(6.seconds);
     //      }   
     // }).start();
+}
+
+void runFn()
+{
+    int counter;
+    while (true)
+    {
+        writeln(counter++);
+        Thread.sleep(1.seconds);
+    }
 }
 
 
