@@ -5,6 +5,7 @@ import service.query;
 import std.array: split;
 import std.string: strip;
 import std.conv: text;
+import service.queue;
 
 void handleRetard(HTTPServerRequest req, HTTPServerResponse res)
 {
@@ -56,7 +57,8 @@ shared static this()
 
 	settings.port = 8080;
 	settings.bindAddresses = ["::1", "0.0.0.0"];
-
 	setAPIKey("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJkZDUzNTMzMC0zMmYxLTAxMzYtODI3Ny0wOWZlNWVjZTk5YjYiLCJpc3MiOiJnYW1lbG9ja2VyIiwiaWF0IjoxNTI1NTY2MzEyLCJwdWIiOiJibHVlaG9sZSIsInRpdGxlIjoicHViZyIsImFwcCI6ImFtb3VudC1vZi1raWxscy1pbi10aW1lLXBlcmlvZCIsInNjb3BlIjoiY29tbXVuaXR5IiwibGltaXQiOjEwfQ.OZCRQlb2Ah2ZkQoo1ImkBNHy0xytQgBgttp_nXZLZqk");
+	push("ReeceTheGeese");
+	startQueueThread();
 	listenHTTP(settings, router);
 }
