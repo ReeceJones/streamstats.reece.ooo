@@ -1,11 +1,9 @@
 import std.stdio;
 import vibe.d;
-import pubg.request;
-import service.query;
 import std.array: split;
 import std.string: strip;
 import std.conv: text;
-import service.queue;
+import service.db;
 
 void handleRetard(HTTPServerRequest req, HTTPServerResponse res)
 {
@@ -49,13 +47,14 @@ shared static this()
 {
 	auto router = new URLRouter;
 
-	router.get("/account.*", &handleRetard);
 	router.get("/ws", handleWebSockets(&handleWebSocketConnection));
-	router.get("*", serveStaticFiles("public/"));
+	router.get("/*", &handleRetard);
+	//router.get("*", serveStaticFiles("public/"));
 
 	auto settings = new HTTPServerSettings;
 
 	settings.port = 8080;
 	settings.bindAddresses = ["::1", "0.0.0.0"];
+	ensureValid();
 	listenHTTP(settings, router);
 }

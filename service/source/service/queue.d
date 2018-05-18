@@ -67,8 +67,6 @@ void startQueue()
     }
 }
 
-
-
 void push(string username)
 {
     usernames ~= username;

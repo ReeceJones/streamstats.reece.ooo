@@ -11,7 +11,6 @@ struct PlayerStats
     int losses;
 }
 
-//TODO: make this just query database and move code from here to some other function
 PlayerStats getFullStats(string region, string accountId)
 {
     PlayerStats playerStats = cast(PlayerStats)0;
