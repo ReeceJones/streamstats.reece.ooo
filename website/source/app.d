@@ -14,8 +14,6 @@ void handleRetard(HTTPServerRequest req, HTTPServerResponse res)
     string requestedStat = s[1];
 	writeln("user: ", requestedUser);
 	writeln("statistic: ", requestedStat);
-	// auto stats = getFullStats("pc-na", "account.f80823e2cd624fe8a5a0aa1899ffcc41");
-	// auto stats = getFullStats("pc-na", requestedUser);
     res.render!("index.dt", requestedStat, requestedUser);
 }
 

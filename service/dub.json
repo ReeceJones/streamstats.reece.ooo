@@ -5,7 +5,7 @@
 	],
 	"dependencies": {
 		"vibe-d": "~>0.8.3",
-		"pubg-d": "~>0.8.3"
+		"pubg-d": "~>0.8.4"
 	},
 	"description": "DB Service for streamstats.reece.ooo",
 	"copyright": "Copyright © 2018, Reece Jones",

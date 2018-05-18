@@ -20,8 +20,7 @@ PlayerStats getFullStats(string region, string accountId)
     {
         auto gmStats = player.getGameModeStats(mode);
         playerStats.kills += gmStats.getKills();
-        //doesn't work because of spelling error :/
-        //playerStats.headshots += gmStats.getHeadshotKills();
+        playerStats.headshots += gmStats.getHeadshotKills();
         playerStats.wins += gmStats.getWins();
         playerStats.losses += gmStats.getLosses();
     }
