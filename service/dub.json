@@ -1,0 +1,12 @@
+{
+	"name": "streamstats-service",
+	"authors": [
+		"Reece Jones"
+	],
+	"dependencies": {
+		"vibe-d": "~>0.8.3"
+	},
+	"description": "DB Service for streamstats.reece.ooo",
+	"copyright": "Copyright © 2018, Reece Jones",
+	"license": "MIT"
+}

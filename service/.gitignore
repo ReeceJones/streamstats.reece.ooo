@@ -1,0 +1,14 @@
+.dub
+docs.json
+__dummy.html
+docs/
+streamstats-service.so
+streamstats-service.dylib
+streamstats-service.dll
+streamstats-service.a
+streamstats-service.lib
+streamstats-service-test-*
+*.exe
+*.o
+*.obj
+*.lst
