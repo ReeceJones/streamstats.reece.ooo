@@ -30,6 +30,8 @@ void handleWebSocketConnection(scope WebSocket socket)
 		string response = "";
 		if (stat == "kills" || stat == "all")
 			response ~= "Kills: " ~ text!int(stats.kills) ~ "<br>";
+		if (stat == "headshots" || stat == "all")
+			response ~= "Headshots: " ~ text!int(stats.headshots) ~ "<br>";
 		if (stat == "wins" || stat == "all")
 			response ~= "Wins: " ~ text!int(stats.wins) ~ "<br>";
 		if (stat == "losses" || stat == "all")
