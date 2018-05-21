@@ -36,6 +36,7 @@ void handleWebSocketConnection(scope WebSocket socket)
 			response ~= "Wins: " ~ text!int(stats.wins) ~ "<br>";
 		if (stat == "losses" || stat == "all")
 			response ~= "Losses: " ~ text!int(stats.losses) ~ "<br>";
+		response ~= stats.status ~ "<br>";
 		socket.send(response);
 		//we can wait a while
 		sleep(10.seconds);

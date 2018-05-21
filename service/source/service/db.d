@@ -17,6 +17,12 @@ void ensureValid()
 {
     conn = connectMongoDB("mongodb://127.0.0.1");
     store = conn.getCollection("stats.pubg");
+    queue = conn.getCollection("queue.pubg");
+}
+
+int getEntries()
+{
+    return cast(int)store.count("{}");
 }
 
 DBStatStore lookupByName(string username)
@@ -27,10 +33,10 @@ DBStatStore lookupByName(string username)
     DBStatStore stats;
     stats.username = username;
     stats.accountId = cast(string)q.front["id"];
-    stats.kills = cast(int)q.front["kills"];
-    stats.headshots = cast(int)q.front["headshots"];
-    stats.wins = cast(int)q.front["wins"];
-    stats.losses = cast(int)q.front["losses"];
+    stats.kills = cast(int)q.front["original"]["kills"];
+    stats.headshots = cast(int)q.front["original"]["headshots"];
+    stats.wins = cast(int)q.front["original"]["wins"];
+    stats.losses = cast(int)q.front["original"]["losses"];
     stats.creationDate = cast(string)q.front["creationDate"];
     stats.status = cast(string)q.front["status"];
     return stats;
@@ -45,10 +51,12 @@ void statsStore(DBStatStore stats)
         store.insert(Bson([
             "username"  : Bson(stats.username),
             "id"        : Bson(stats.accountId),
-            "kills"     : Bson(stats.kills),
-            "headshots" : Bson(stats.headshots),
-            "wins"      : Bson(stats.wins),
-            "losses"    : Bson(stats.losses),
+            "original"  : Bson([
+                "kills"     : Bson(stats.kills),
+                "headshots" : Bson(stats.headshots),
+                "wins"      : Bson(stats.wins),
+                "losses"    : Bson(stats.losses)
+            ]),
             "creationDate" : Bson(stats.creationDate),
             "status"    : Bson(stats.status)
         ]));
@@ -59,18 +67,35 @@ void statsStore(DBStatStore stats)
         Bson([
             "username"  : Bson(stats.username),
             "id"        : Bson(stats.accountId),
-            "kills"     : Bson(stats.kills),
-            "headshots" : Bson(stats.headshots),
-            "wins"      : Bson(stats.wins),
-            "losses"    : Bson(stats.losses),
+            "original"  : Bson([
+                "kills"     : Bson(stats.kills),
+                "headshots" : Bson(stats.headshots),
+                "wins"      : Bson(stats.wins),
+                "losses"    : Bson(stats.losses)
+            ]),
             "creationDate" : Bson(stats.creationDate),
             "status"    : Bson(stats.status)
         ]));
     }
 }
 
+string[] getQueued()
+{
+    //find everyone in the queue
+    auto q = queue.find();
+    string[] queued;
+    foreach (i, doc; q.byPair)
+    {
+        queued ~= cast(string)doc["username"];
+    }
+    //clear queue
+    queue.remove(Bson(""));
+    return queued;
+}
+
 private
 {
     MongoClient conn;
     MongoCollection store;
+    MongoCollection queue;
 }

@@ -26,10 +26,10 @@ DBStatStore lookupByName(string username)
     DBStatStore stats;
     stats.username = username;
     stats.accountId = cast(string)q.front["id"];
-    stats.kills = cast(int)q.front["kills"];
-    stats.headshots = cast(int)q.front["headshots"];
-    stats.wins = cast(int)q.front["wins"];
-    stats.losses = cast(int)q.front["losses"];
+    stats.kills = cast(int)q.front["original"]["kills"];
+    stats.headshots = cast(int)q.front["original"]["headshots"];
+    stats.wins = cast(int)q.front["original"]["wins"];
+    stats.losses = cast(int)q.front["original"]["losses"];
     stats.creationDate = cast(string)q.front["creationDate"];
     stats.status = cast(string)q.front["status"];
     return stats;
