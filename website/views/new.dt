@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title New Tracker
+    body
+        form(action='/new_tracker', method='post')
+            input(type='text', name='username', 'placeholder='username (case sensitive)')
+            br
+            |="Statistics"
+            br
+            input(type='radio', name='stat', value='kills')
+            |="Kills"
+            br
+            input(type='radio', name='stat', value='headshots')
+            |="Headshots"
+            br
+            input(type='radio', name='stat', value='losses')
+            |="Losses"
+            br
+            input(type='radio', name='stat', value='wins')
+            |="Wins"
+            br
+            input(type='radio', name='stat', value='all')
+            |="All"
+            br
+            input(type='submit', value='submit')

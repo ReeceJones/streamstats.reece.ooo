@@ -15,6 +15,8 @@ void startQueue()
     {
         Thread.sleep(6.seconds);
         writeln("updating...");
+        iterateDBQueue();
+        writeln(usernames);
         if (usernames.length <= 0)
         {
             // Thread.sleep(6.seconds);
@@ -80,14 +82,18 @@ void startQueue()
             auto currentTime = Clock.currTime();
             if (SysTime.fromISOExtString(lookup.creationDate).day + 2 > currentTime.day)
             {
+                //only if they are still valid do they get pushed back into the queue
                 push(user);
             }
             else
+            {
                 store.status = "STATISTIC TRACKER EXPIRED";
+                //they won't be added back into the queue
+                removeFromQueue(user);
+            }
             //then store the new information
             statsStore(store);
         }
-        iterateDBQueue();
     }
 }
 

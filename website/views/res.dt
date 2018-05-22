@@ -1,0 +1,10 @@
+doctype html
+html
+    head
+        title New Tracker
+    body
+        h3
+            |="Tracker Created"
+        b
+            |="To use the tracker add the following link to your stream overlay."
+        b Link: #{responseURL}

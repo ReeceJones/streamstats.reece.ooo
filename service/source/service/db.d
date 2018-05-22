@@ -115,6 +115,13 @@ string[] getQueued()
     return queued;
 }
 
+void removeFromQueue(string username)
+{
+    queue.remove(Bson([
+        "username" : Bson(username)
+    ]));
+}
+
 private
 {
     MongoClient conn;

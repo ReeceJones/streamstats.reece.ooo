@@ -44,21 +44,51 @@ void handleWebSocketConnection(scope WebSocket socket)
 	logInfo("Client disconnected.");
 }
 
+void handleNewTracker(HTTPServerRequest req, HTTPServerResponse res)
+{
+	//make sure they did something
+    enforceHTTP("username" in req.form && "stat" in req.form,
+		HTTPStatus.badRequest, "Missing username field.");
+	string username = cast(string)req.form["username"];
+	//now add them to the queue
+	queueInsert(username);
+	string responseURL = "localhost:8080/" ~ username ~ "/";
+	switch (req.form["stat"])
+	{
+		default:
+			responseURL ~= "all";
+		break;
+		case "kills":
+			responseURL ~= "kills";
+		break;
+		case "headshots":
+			responseURL ~= "headshots";
+		break;
+		case "losses":
+			responseURL ~= "losses";
+		break;
+		case "wins":
+			responseURL ~= "wins";
+		break;
+	}
+	res.render!("res.dt", responseURL);
+}
+
 shared static this()
 {
 	auto router = new URLRouter;
 
 	router.get("/ws", handleWebSockets(&handleWebSocketConnection));
+	router.get("/new", staticTemplate!("new.dt"));
 	router.get("/*", &handleRetard);
 	//router.get("*", serveStaticFiles("public/"));
+
+	router.post("/new_tracker", &handleNewTracker);
 
 	auto settings = new HTTPServerSettings;
 
 	settings.port = 8080;
 	settings.bindAddresses = ["::1", "0.0.0.0"];
 	ensureValid();
-	queueInsert("shroud");
-	queueInsert("mrpoopydickhole");
-	queueInsert("ReeceTheGeese");
 	listenHTTP(settings, router);
 }
