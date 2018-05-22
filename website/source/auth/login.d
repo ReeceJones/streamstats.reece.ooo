@@ -38,13 +38,13 @@ void create(HTTPServerRequest req, HTTPServerResponse res)
     string password = req.form["password"];
     string isAdmin = username == "reece" ? "true" : "false";
     if (createUser(username, password, isAdmin) == false)
-        res.redirect("/l");
+        res.redirect("/login");
     else
     {
         auto session = res.startSession();
         session.set("username", username);
         session.set("isAdmin", isAdmin);
-        res.redirect("/cp");
+        res.redirect("/new");
     }
 }
 
