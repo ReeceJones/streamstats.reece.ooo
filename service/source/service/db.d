@@ -3,10 +3,14 @@ import vibe.db.mongo.mongo;
 
 struct DBStatStore
 {
-    int kills;
-    int headshots;
-    int wins;
-    int losses;
+    int originalKills;
+    int originalHeadshots;
+    int originalWins;
+    int originalLosses;    
+    int postKills;
+    int postHeadshots;
+    int postWins;
+    int postLosses;
     string username;
     string accountId;
     string creationDate;
@@ -33,10 +37,16 @@ DBStatStore lookupByName(string username)
     DBStatStore stats;
     stats.username = username;
     stats.accountId = cast(string)q.front["id"];
-    stats.kills = cast(int)q.front["original"]["kills"];
-    stats.headshots = cast(int)q.front["original"]["headshots"];
-    stats.wins = cast(int)q.front["original"]["wins"];
-    stats.losses = cast(int)q.front["original"]["losses"];
+    stats.originalKills = cast(int)q.front["original"]["kills"];
+    stats.originalHeadshots = cast(int)q.front["original"]["headshots"];
+    stats.originalWins = cast(int)q.front["original"]["wins"];
+    stats.originalLosses = cast(int)q.front["original"]["losses"];
+
+    stats.postKills = cast(int)q.front["post"]["kills"];
+    stats.postHeadshots = cast(int)q.front["post"]["headshots"];
+    stats.postWins = cast(int)q.front["post"]["wins"];
+    stats.postLosses = cast(int)q.front["post"]["losses"];
+    
     stats.creationDate = cast(string)q.front["creationDate"];
     stats.status = cast(string)q.front["status"];
     return stats;
@@ -52,10 +62,16 @@ void statsStore(DBStatStore stats)
             "username"  : Bson(stats.username),
             "id"        : Bson(stats.accountId),
             "original"  : Bson([
-                "kills"     : Bson(stats.kills),
-                "headshots" : Bson(stats.headshots),
-                "wins"      : Bson(stats.wins),
-                "losses"    : Bson(stats.losses)
+                "kills"     : Bson(stats.originalKills),
+                "headshots" : Bson(stats.originalHeadshots),
+                "wins"      : Bson(stats.originalWins),
+                "losses"    : Bson(stats.originalLosses)
+            ]),
+            "post"  : Bson([
+                "kills"     : Bson(stats.postKills),
+                "headshots" : Bson(stats.postHeadshots),
+                "wins"      : Bson(stats.postWins),
+                "losses"    : Bson(stats.postLosses)
             ]),
             "creationDate" : Bson(stats.creationDate),
             "status"    : Bson(stats.status)
@@ -68,10 +84,16 @@ void statsStore(DBStatStore stats)
             "username"  : Bson(stats.username),
             "id"        : Bson(stats.accountId),
             "original"  : Bson([
-                "kills"     : Bson(stats.kills),
-                "headshots" : Bson(stats.headshots),
-                "wins"      : Bson(stats.wins),
-                "losses"    : Bson(stats.losses)
+                "kills"     : Bson(stats.originalKills),
+                "headshots" : Bson(stats.originalHeadshots),
+                "wins"      : Bson(stats.originalWins),
+                "losses"    : Bson(stats.originalLosses)
+            ]),
+            "post"  : Bson([
+                "kills"     : Bson(stats.postKills),
+                "headshots" : Bson(stats.postHeadshots),
+                "wins"      : Bson(stats.postWins),
+                "losses"    : Bson(stats.postLosses)
             ]),
             "creationDate" : Bson(stats.creationDate),
             "status"    : Bson(stats.status)
@@ -88,8 +110,8 @@ string[] getQueued()
     {
         queued ~= cast(string)doc["username"];
     }
-    //clear queue
-    queue.remove(Bson(""));
+    // //clear queue
+    // queue.remove(Bson(""));
     return queued;
 }
 

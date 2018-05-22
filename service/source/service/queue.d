@@ -29,7 +29,8 @@ void startQueue()
             DBStatStore store;
             store.username = user;
             store.accountId = player.getId();
-            writeln(store.accountId);
+            writeln(user ~ ":");
+            writeln("\t" ~ store.accountId);
             //store.creationDate = PosixTimeZone.getTimeZone("America/Los_Angeles").toISOExtString();
             auto currentTime = Clock.currTime();
             auto timeString = currentTime.toISOExtString();
@@ -46,17 +47,35 @@ void startQueue()
             DBStatStore store;
             store.username = user;
             store.accountId = lookup.accountId;
-            store.status = "";
             store.creationDate = lookup.creationDate;
-            store.kills = newStats.kills;
-            store.headshots = newStats.headshots;
-            store.wins = newStats.wins;
-            store.losses = newStats.losses;
+
+            if (lookup.status == "loading...")
+            {
+                store.originalKills = newStats.kills;
+                store.originalHeadshots = newStats.headshots;
+                store.originalWins = newStats.wins;
+                store.originalLosses = newStats.losses;
+            }
+            else
+            {
+                store.originalKills = lookup.originalKills;
+                store.originalHeadshots = lookup.originalHeadshots;
+                store.originalLosses = lookup.originalLosses;
+                store.originalWins = lookup.originalWins;
+
+                store.postKills = newStats.kills;
+                store.postHeadshots = newStats.headshots;
+                store.postWins = newStats.wins;
+                store.postLosses = newStats.losses;
+            }
+ 
+            store.status = "";
+
             writeln(user ~ ":");
-            writeln("\tkills: " ~ text!int(store.kills));
-            writeln("\theadshots: " ~ text!int(store.headshots));
-            writeln("\tlosses: " ~ text!int(store.losses));
-            writeln("\twins: " ~ text!int(store.wins));
+            writeln("\tkills: " ~ text!int(store.originalKills));
+            writeln("\theadshots: " ~ text!int(store.originalHeadshots));
+            writeln("\tlosses: " ~ text!int(store.originalLosses));
+            writeln("\twins: " ~ text!int(store.originalWins));
             //check if the user is valid before readding them to the stack
             auto currentTime = Clock.currTime();
             if (SysTime.fromISOExtString(lookup.creationDate).day + 2 > currentTime.day)

@@ -25,7 +25,7 @@ void handleWebSocketConnection(scope WebSocket socket)
 	auto stat = socket.receiveText().strip;
 	while (true)
 	{
-		auto stats = getFullStats("pc-na", user);
+		auto stats = getFullStats("pc-na", user, false);
 		if (!socket.connected) break;
 		string response = "";
 		if (stat == "kills" || stat == "all")
@@ -57,5 +57,8 @@ shared static this()
 	settings.port = 8080;
 	settings.bindAddresses = ["::1", "0.0.0.0"];
 	ensureValid();
+	queueInsert("shroud");
+	queueInsert("mrpoopydickhole");
+	queueInsert("ReeceTheGeese");
 	listenHTTP(settings, router);
 }
