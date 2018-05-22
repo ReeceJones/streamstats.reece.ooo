@@ -1,0 +1,51 @@
+doctype html
+html
+    head
+        title Stats
+    body
+        div(id='hotload')
+            |="Starting text"
+        div(id='id', style='visibility: hidden')
+            |= requestedUser
+        div(id='stat', style='visibility: hidden')
+            |= requestedStat
+        div(id='delta', style='visibility: hidden')
+            |= useDelta
+        :javascript
+            var socket
+
+            function connect()
+            {
+                setText("connecting...");
+                socket = new WebSocket(getBaseURL() + "/ws");
+                socket.onopen = function() {
+                    setText("connected. sending requests...");
+                    window.setTimeout(socket.send(document.getElementById('id').innerHTML), 500);
+                    window.setTimeout(socket.send(document.getElementById('stat').innerHTML), 500);
+                    window.setTimeout(socket.send(document.getElementById('delta').innerHTML), 500);
+                    setText("waiting for response...");
+                }
+                socket.onmessage = function(message) {	
+                    setText(message.data);
+                }
+            }
+
+            function closeConnection()
+            {
+                socket.close();
+                setText("closed.");
+            }
+
+            function setText(text)
+            {
+                document.getElementById("hotload").innerHTML = text;
+            }
+
+            function getBaseURL()
+            {
+                var href = window.location.href.substring(7); // strip "http://"
+                var idx = href.indexOf("/");
+                return "ws://" + href.substring(0, idx);
+            }
+
+            connect();

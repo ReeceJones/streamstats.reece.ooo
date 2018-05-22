@@ -14,9 +14,9 @@ void startQueue()
     while (true)
     {
         Thread.sleep(6.seconds);
-        writeln("updating...");
+        //writeln("updating...");
         iterateDBQueue();
-        writeln(usernames);
+        //writeln(usernames);
         if (usernames.length <= 0)
         {
             // Thread.sleep(6.seconds);
@@ -31,8 +31,8 @@ void startQueue()
             DBStatStore store;
             store.username = user;
             store.accountId = player.getId();
-            writeln(user ~ ":");
-            writeln("\t" ~ store.accountId);
+            //writeln(user ~ ":");
+            //writeln("\t" ~ store.accountId);
             //store.creationDate = PosixTimeZone.getTimeZone("America/Los_Angeles").toISOExtString();
             auto currentTime = Clock.currTime();
             auto timeString = currentTime.toISOExtString();
@@ -73,11 +73,11 @@ void startQueue()
  
             store.status = "";
 
-            writeln(user ~ ":");
-            writeln("\tkills: " ~ text!int(store.originalKills));
-            writeln("\theadshots: " ~ text!int(store.originalHeadshots));
-            writeln("\tlosses: " ~ text!int(store.originalLosses));
-            writeln("\twins: " ~ text!int(store.originalWins));
+            // writeln(user ~ ":");
+            // writeln("\tkills: " ~ text!int(store.originalKills));
+            // writeln("\theadshots: " ~ text!int(store.originalHeadshots));
+            // writeln("\tlosses: " ~ text!int(store.originalLosses));
+            // writeln("\twins: " ~ text!int(store.originalWins));
             //check if the user is valid before readding them to the stack
             auto currentTime = Clock.currTime();
             if (SysTime.fromISOExtString(lookup.creationDate).day + 2 > currentTime.day)

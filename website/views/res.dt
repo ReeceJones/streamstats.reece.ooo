@@ -3,8 +3,9 @@ html
     head
         title New Tracker
     body
-        h3
+        h2
             |="Tracker Created"
+        br
         b
             |="To use the tracker add the following link to your stream overlay."
         b Link: #{responseURL}
