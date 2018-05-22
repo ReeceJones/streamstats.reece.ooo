@@ -1,5 +1,7 @@
 module service.db;
 import vibe.db.mongo.mongo;
+import dauth;
+import std.conv: parse;
 
 struct DBStatStore
 {
@@ -22,6 +24,7 @@ void ensureValid()
     conn = connectMongoDB("mongodb://127.0.0.1");
     store = conn.getCollection("stats.pubg");
     queue = conn.getCollection("queue.pubg");
+    users = conn.getCollection("auth.users");
 }
 
 DBStatStore lookupByName(string username)
@@ -86,9 +89,52 @@ void queueInsert(string username)
     ]));
 }
 
+bool checkPassword(string usr, string pwdRaw, out bool admin)
+{
+    auto q = users.find(Bson(["username" : Bson(usr)]));
+    foreach (i, doc; q.byPair)
+    {
+        if (isSameHash(toPassword(cast(char[])pwdRaw), parseHash(cast(string)doc["password"])))
+        {
+            auto isAdmin = cast(string)doc["admin"];
+            admin = parse!bool(isAdmin);
+            return true;
+        }
+    }
+    return false;
+}
+
+bool createUser(string user, string rawPWD, string isAdmin)
+{
+    bool exists = !users.find(Bson(["username" : Bson(user)])).empty;
+    //could not create user
+    if (exists == true)
+        return false;
+    string hashString = makeHash(toPassword(cast(char[])rawPWD)).toString();
+    //now just need to insert into mongo
+    users.insert(Bson([
+        "username"  : Bson(user),
+        "password"  : Bson(hashString),
+        "admin"     : Bson(isAdmin)
+    ]));
+    return true;
+}
+
+void updateUserPWD(string user, string newPWD)
+{
+    string hashString = makeHash(toPassword(cast(char[])newPWD)).toString();
+    users.update(Bson(
+        ["username"  : Bson(user)]
+    ),
+    Bson(
+        ["password"  : Bson(hashString)]
+    ));
+}
+
 private
 {
     MongoClient conn;
     MongoCollection store;
     MongoCollection queue;
+    MongoCollection users;
 }

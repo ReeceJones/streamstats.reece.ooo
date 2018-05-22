@@ -3,6 +3,7 @@
 	"versions": {
 		"botan": "1.12.9",
 		"botan-math": "1.0.3",
+		"dauth": "0.6.3",
 		"diet-ng": "1.4.5",
 		"eventcore": "0.8.34",
 		"libasync": "0.8.3",

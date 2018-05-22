@@ -4,7 +4,8 @@
 		"Reece Jones"
 	],
 	"dependencies": {
-		"vibe-d": "~>0.8.3"
+		"vibe-d": "~>0.8.3",
+		"dauth": "~>0.6.3"
 	},
 	"description": "Application for tracking statistics of streamers, and allowing the statistic to be displayed on the stream.",
 	"copyright": "Copyright © 2018, Reece Jones",

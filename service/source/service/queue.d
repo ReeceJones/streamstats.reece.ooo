@@ -51,7 +51,7 @@ void startQueue()
             store.accountId = lookup.accountId;
             store.creationDate = lookup.creationDate;
 
-            if (lookup.status == "loading...")
+            if (lookup.status == "loading..." || lookup.status == "STATISTIC TRACKER EXPIRED")
             {
                 store.originalKills = newStats.kills;
                 store.originalHeadshots = newStats.headshots;

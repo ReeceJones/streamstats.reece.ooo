@@ -20,6 +20,13 @@ void handleNewTracker(HTTPServerRequest req, HTTPServerResponse res)
 	//make sure they did something
     enforceHTTP("username" in req.form && "stat" in req.form,
 		HTTPStatus.badRequest, "Missing username field.");
+
+	if (!req.session)
+	{
+		res.redirect("/login");
+		return;
+	}
+
 	string username = cast(string)req.form["username"];
 	//now add them to the queue
 	queueInsert(username);
@@ -42,6 +49,5 @@ void handleNewTracker(HTTPServerRequest req, HTTPServerResponse res)
 			responseURL ~= "wins";
 		break;
 	}
-	res.redirect("/new");
 	res.render!("res.dt", responseURL);
 }
