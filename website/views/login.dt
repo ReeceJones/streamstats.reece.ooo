@@ -6,12 +6,12 @@ html(lang="en")
         meta(http-equiv='X-UA-Compatible', content='ie=edge')
         title Login
     body
+        link(href='/style.css', rel='stylesheet')
         main
             div(class='content-body', id='content')
-                h1(style='text-align: center; color:black') Login
-                form(action='/login', method='post')
-                    input(type='text', name='username', placeholder='username')
-                    br
-                    input(type='password', name='password', placeholder='password')
-                    br
-                    input(type='submit', value='submit')
+                h1(style='text-align: center;') Login
+                div(class='content-form')
+                    form(action='/login', method='post')
+                        input(type='text', name='username', placeholder='username')
+                        input(type='password', name='password', placeholder='password')
+                        input(type='submit', value='submit')

@@ -17,7 +17,7 @@ shared static this()
 	router.get("/create", staticTemplate!("create.dt"));
 	router.get("/create/", staticTemplate!("create.dt"));
 	router.get("/stats/*", &handleTracker);
-	//router.get("*", serveStaticFiles("public/"));
+	router.get("*", serveStaticFiles("public/"));
 
 	router.post("/new", &handleNewTracker);
 	router.post("/login", &login);

@@ -6,5 +6,18 @@ html(lang="en")
         meta(http-equiv='X-UA-Compatible', content='ie=edge')
         title Login
     body
+        link(href='/style.css', rel='stylesheet')
         main
-            div(class='content-body', id='content')
+            div(class='title', id='content')
+                b StreamStats
+                div(style='height: 50px')
+                div(class='content', style='font-size: 20px; color:white;')
+                    div(class='content-body')
+                        article StreamStats is an open-source player tracker intended to be used by streamers. StreamStats provides ingame player information through simple interfaces. To get started all you need to do is <a href="/create">make an account</a>, then <a href="/new">create a new tracker</a>. To show the statistics on your screen all you need to do is add the link provided as a browser source. Thats it!
+                    a(href='/login', style='font-size: 20px') Login
+                    span(style='width: 10px')
+                    |=" |"
+                    a(href='/create', style='font-size: 20px') Create Account
+                    span(style='width: 10px')
+                    |=" |"
+                    a(href='/new', style='font-size: 20px') New Tracker

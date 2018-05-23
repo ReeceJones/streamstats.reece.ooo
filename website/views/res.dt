@@ -3,9 +3,11 @@ html
     head
         title New Tracker
     body
+        link(href='/style.css', rel='stylesheet')
         h2
             |="Tracker Created"
         br
-        b
-            |="To use the tracker add the following link to your stream overlay."
-        b Link: #{responseURL}
+        div(class='response')
+            b
+                |="To use the tracker add the following link to your stream overlay."
+            b Link: <a href="#{responseURL}">#{responseURL}</a>
