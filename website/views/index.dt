@@ -24,3 +24,6 @@ html(lang="en")
                     span(style='width: 10px')
                     |=" |"
                     a(href='/new', style='font-size: 20px') New Tracker
+                    span(style='width: 10px')
+                    |=" |"
+                    a(href='https://github.com/ReeceJones/streamstats.reece.ooo', style='font-size: 20px') GitHub
