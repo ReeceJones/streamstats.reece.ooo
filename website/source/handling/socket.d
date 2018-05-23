@@ -27,7 +27,7 @@ void handleWebSocketConnection(scope WebSocket socket)
 		response ~= stats.status ~ "<br>";
 		socket.send(response);
 		//we can wait a while
-		sleep(10.seconds);
+		sleep(5.seconds);
 	}
 	logInfo("Client disconnected.");
 }

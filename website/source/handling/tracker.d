@@ -7,8 +7,8 @@ import std.array: split;
 void handleTracker(HTTPServerRequest req, HTTPServerResponse res)
 {
     auto uri = req.requestURI; 
-	//remove the blank
-    string[] s = uri.split("/")[1..$];
+	//remove the blank and stats
+    string[] s = uri.split("/")[2..$];
     string requestedUser = s[0];
     string requestedStat = s[1];
 	string useDelta = text!bool(s.length > 2 && s[2] == "delta");
@@ -30,7 +30,7 @@ void handleNewTracker(HTTPServerRequest req, HTTPServerResponse res)
 	string username = cast(string)req.form["username"];
 	//now add them to the queue
 	queueInsert(username);
-	string responseURL = "localhost:8080/" ~ username ~ "/";
+	string responseURL = "localhost:8080/stats/" ~ username ~ "/";
 	switch (req.form["stat"])
 	{
 		default:
