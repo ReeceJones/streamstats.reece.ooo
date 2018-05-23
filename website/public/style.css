@@ -25,6 +25,7 @@ body {
     top: 0;
     font-family: 'Ubuntu', sans-serif;
     text-align: center;
+    animation-duration: 1s;
 }
 h1 {
     color: white;
