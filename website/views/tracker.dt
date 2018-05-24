@@ -43,7 +43,7 @@ html
 
             function getBaseURL()
             {
-                var href = window.location.href.substring(7); // strip "http://"
+                var href = window.location.href.substring(8); // strip "https://"
                 var idx = href.indexOf("/");
                 return "ws://" + href.substring(0, idx);
             }

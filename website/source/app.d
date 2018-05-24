@@ -25,7 +25,7 @@ shared static this()
 
 	auto settings = new HTTPServerSettings;
 
-	settings.port = 8080;
+	settings.port = 9002;
 	settings.bindAddresses = ["::1", "0.0.0.0"];
 	settings.sessionStore = new MemorySessionStore;
 	ensureValid();
