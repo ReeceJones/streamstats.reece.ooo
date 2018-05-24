@@ -66,7 +66,7 @@ PlayerStats getFullStats(string region, string name, bool useDelta)
         playerStats.kills = store.postKills - store.originalKills;
         playerStats.headshots = store.postHeadshots - store.originalHeadshots;
         playerStats.wins = store.postWins - store.originalWins;
-        playerStats.losses = store.originalLosses - store.originalLosses;
+        playerStats.losses = store.postLosses - store.originalLosses;
         playerStats.status = store.status;
     }
     else
