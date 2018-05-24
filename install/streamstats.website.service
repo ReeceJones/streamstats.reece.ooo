@@ -1,0 +1,17 @@
+[Unit]
+Description=StreamStats website
+After=auditd.service systemd-user-sessions.service time-sync.target
+
+[Service]
+User=root
+TimeoutStartSec=0
+Type=simple
+KillMode=process
+WorkingDirectory=/etc/vibe/streamstats.reece.ooo/website/
+ExecStart=/etc/vibe/streamstats.reece.ooo/service/streamstats
+Restart=always
+RestartSec=2
+LimitNOFILE=5555
+
+[Install]
+WantedBy=multi-user.target
