@@ -7,6 +7,7 @@ import std.stdio;
 import service.query;
 import std.string: strip;
 import std.conv: text;
+import std.net.curl: CurlException;
 
 void startQueue()
 {
@@ -27,20 +28,32 @@ void startQueue()
         //user is not in the database, have to add them
         if (lookup == cast(DBStatStore)0)
         {
-            auto player = playerRequest.getPlayerFromName(user);
-            DBStatStore store;
-            store.username = user;
-            store.accountId = player.getId();
-            //writeln(user ~ ":");
-            //writeln("\t" ~ store.accountId);
-            //store.creationDate = PosixTimeZone.getTimeZone("America/Los_Angeles").toISOExtString();
-            auto currentTime = Clock.currTime();
-            auto timeString = currentTime.toISOExtString();
-            store.creationDate = timeString;
-            store.status = "loading...";
-            //store the user in the database
-            statsStore(store);
-            push(user);
+            try
+            {
+                auto player = playerRequest.getPlayerFromName(user);
+                DBStatStore store;
+                store.username = user;
+                store.accountId = player.getId();
+                //writeln(user ~ ":");
+                //writeln("\t" ~ store.accountId);
+                //store.creationDate = PosixTimeZone.getTimeZone("America/Los_Angeles").toISOExtString();
+                auto currentTime = Clock.currTime();
+                auto timeString = currentTime.toISOExtString();
+                store.creationDate = timeString;
+                store.status = "loading...";
+                //store the user in the database
+                statsStore(store);
+                push(user);
+            }
+            catch (CurlException ce)
+            {
+                //something went wrong with looking them up, and we don't want to deal with that
+                removeFromQueue(user);
+                DBStatStore store;
+                store.username  = user;
+                store.status = "An error occured in looking up the player name. User might not exist. Please create the tracker again.";
+                statsStore(store);
+            }
         }
         else
         {
