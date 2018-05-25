@@ -1,7 +1,7 @@
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Ubuntu:700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Righteous');
 /*
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Righteous', cursive;
     font-family: 'Ubuntu', sans-serif;
 */
 
@@ -20,10 +20,10 @@ main {
     top: 0;
 }
 body {
-    background-color: #111111;
+    background-color: #8B41FF;
     position: relative;
     top: 0;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Righteous', cursive;
     text-align: center;
     animation-duration: 1s;
 }
@@ -31,10 +31,11 @@ h1 {
     color: white;
 }
 .title {
-    font-size: 110px;
+    font-size: 120px;
     position: relative;
     top: 30%;
     color:#D400FF;
+    text-align: center;
 }
 .subtitle {
     font-size: 16px;

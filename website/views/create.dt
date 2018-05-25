@@ -7,10 +7,15 @@ html(lang="en")
         title Create Account
     body
         link(href='/style.css', rel='stylesheet')
+        link(href='/animate.css', rel='stylesheet')
+        div(class='slide-top animated slideInRight', style='background-color: white; z-index=-1; width: 100%; height: calc(10% + 55px); position: absolute;')
+        div(class='slide-top animated slideInLeft', style='background-color: #222; z-index=-2; width: 100%; top: calc(10% + 55px); height:100%; position: absolute;')
         main
+            div(class='title animated slideInRight', style='top: 2%; position: relative;')
+                b StreamStats
             div(class='content-body', id='content')
-                h1(style='text-align: center;') Create Account
-                div(class='content-form')
+                h1(class='animated slideInLeft', style='text-align: center;') Create Account
+                div(class='content-form animated slideInLeft')
                     form(action='/create', method='post')
                         input(type='text', name='username', placeholder='username')
                         input(type='password', name='password', placeholder='password')

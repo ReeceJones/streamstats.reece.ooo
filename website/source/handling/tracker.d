@@ -30,7 +30,7 @@ void handleNewTracker(HTTPServerRequest req, HTTPServerResponse res)
 	string username = cast(string)req.form["username"];
 	//now add them to the queue
 	queueInsert(username);
-	string responseURL = "http://localhost:8080/stats/" ~ username ~ "/";
+	string responseURL = "https://streamstats.reece.ooo/stats/" ~ username ~ "/";
 	switch (req.form["stat"])
 	{
 		default:

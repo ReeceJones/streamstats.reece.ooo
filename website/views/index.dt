@@ -5,14 +5,15 @@ html(lang="en")
         meta(name='viewport', content='width=device-width, initial-scale=1.0')
         meta(http-equiv='X-UA-Compatible', content='ie=edge')
         title StreamStats
-    body(style='background-color:#D400FF;')
+    body
         link(href='/style.css', rel='stylesheet')
         link(href='/animate.css', rel='stylesheet')
         div(class='slide-top animated slideInRight', style='background-color: white; z-index=-1; width: 100%; height: calc(40% + 55px); position: absolute;')
-        div(class='slide-top animated slideInLeft', style='background-color: black; z-index=-2; width: 100%; top: calc(40% + 55px); height:100%; position: absolute;')
+        div(class='slide-top animated slideInLeft', style='background-color: #222; z-index=-2; width: 100%; top: calc(40% + 55px); height:100%; position: absolute;')
         main
             div(class='title', id='content')
-                b StreamStats
+                div(class='animated slideInRight')
+                    b StreamStats
                 div(style='height: 50px')
                 div(class='content animated slideInLeft', style='font-size: 20px; color:white;')
                     div(class='content-body')
